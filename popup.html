@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        width: 320px;
+        padding: 20px;
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        background: hsl(210, 28%, 15%);
+        color: hsl(0, 0%, 100%);
+      }
+
+      h1 {
+        margin: 0 0 15px 0;
+        color: hsl(0, 0%, 100%);
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+      }
+
+      #protectedUrls {
+        flex-grow: 1;
+        padding: 8px 12px;
+        border: 1px solid hsl(210, 16%, 41%);
+        border-radius: 6px;
+        font-size: 14px;
+        background: hsl(210, 22%, 25%);
+        color: hsl(0, 0%, 100%);
+      }
+
+      #protectedUrls:focus {
+        outline: none;
+        border-color: hsl(204, 71%, 53%);
+        box-shadow: 0 0 0 3px hsla(204, 71%, 53%, 0.5);
+      }
+
+      #addUrl,
+      #addCurrentUrl {
+        background-color: hsl(204, 71%, 53%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 16px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      #addUrl:hover,
+      #addCurrentUrl:hover {
+        background-color: hsl(204, 71%, 60%);
+      }
+
+      #addUrl:focus,
+      #addCurrentUrl:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px hsla(204, 71%, 53%, 0.5);
+      }
+
+      .add-current-site {
+        background: hsl(210, 22%, 25%);
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .current-url {
+        font-size: 13px;
+        color: hsl(210, 16%, 80%);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 160px;
+      }
+
+      .protected-sites {
+        margin-top: 15px;
+        background: hsl(210, 22%, 25%);
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .site {
+        padding: 10px 12px;
+        border-bottom: 1px solid hsl(210, 16%, 41%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: hsl(0, 0%, 100%);
+      }
+
+      .remove-btn {
+        background-color: hsl(0, 78%, 51%);
+        color: white;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .remove-btn:hover {
+        background-color: hsl(0, 78%, 60%);
+      }
+
+      .remove-btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px hsla(0, 78%, 51%, 0.5);
+      }
+
+      .info-text {
+        color: hsl(210, 27%, 92%);
+        font-size: 13px;
+        margin-top: 15px;
+        margin-bottom: 0;
+        padding: 10px;
+        background: hsla(204, 71%, 53%, 0.1);
+        border-radius: 6px;
+        border-left: 3px solid hsl(204, 71%, 53%);
+      }
+
+      .message-container {
+        min-height: 40px;
+        margin-top: 10px;
+      }
+
+      .message {
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+      }
+
+      .error-message {
+        background: hsl(0, 30%, 20%);
+        color: hsl(0, 100%, 87%);
+        outline: 2px solid hsl(0, 78%, 51%);
+      }
+
+      .success-message {
+        background: hsl(134, 30%, 20%);
+        color: hsl(134, 61%, 85%);
+        outline: 2px solid hsl(134, 61%, 54%);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tab Protector</h1>
+    <div class="input-group">
+      <input
+        type="text"
+        id="protectedUrls"
+        placeholder="Enter URL (e.g., example.com/path)"
+      />
+      <button id="addUrl">Add</button>
+    </div>
+    <div class="add-current-site">
+      <span class="current-url">Loading current URL...</span>
+      <button id="addCurrentUrl">Add Current Site</button>
+    </div>
+    <div class="message-container">
+      <div class="message"></div>
+    </div>
+    <div class="protected-sites" id="protectedUrlsList"></div>
+    <p class="info-text">
+      Tab closing and refreshing are protected on these URLs and their subpages
+    </p>
+    <script src="popup.js"></script>
+  </body>
+</html>

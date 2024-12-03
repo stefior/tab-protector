@@ -3,7 +3,7 @@ Tab Protector is a browser extension designed for preventing accidental closure 
 How to choose a URL:
 - Entering a URL will apply the protection to any URLs that start with what you submitted.
 - For example, protecting "example.com" will also cover "example.com/path", but protecting "example.com/path" won't also cover "example.com".
-- The same is true for subdomains. If you set "example.com" as protected, that won't cover "sub.example.com" or "sub.example.com/path" becuase they don't start with "example.com", and vice versa.
+- The same is true for subdomains. If you set "example.com" as protected, that won't cover "sub.example.com" or "sub.example.com/path" because they don't start with "example.com", and vice versa.
 
 IMPORTANT:
 - Due to Chrome's restrictions, this will only work for pages once you've somehow interacted with the page at any point after loading it, like by clicking anywhere inside the viewport once.
@@ -11,7 +11,7 @@ IMPORTANT:
 
 Key Features:
 - Tab Close/Refresh Protection:
-    Once activated for a particular URL, the extension prevents the tab from being refreshed or closed accidentally, no matter how the refresh/close is initiated. Users attempting to close a protected tab will see popup asking if they truly want to close the tab. A notificaiton will also show on the page briefly to remind them why that is showing.
+    Once activated for a particular URL, the extension prevents the tab from being refreshed or closed accidentally, no matter how the refresh/close is initiated. Users attempting to close a protected tab will see a popup asking if they truly want to close the tab. A notification will also show on the page briefly to remind them why that is showing.
 - Extra Refresh Prevention:
     Blocks unintended page reloads caused by pressing keys like F5 or Ctrl+R without showing the prompt. Due to how Chrome is set up, this extra protection is only possible for refreshing shortcuts while the website itself is in focus, and it is not possible for built-in shortcuts that would close the tab.
 - Customizable URL List:

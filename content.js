@@ -1,5 +1,8 @@
 let notificationTimeout;
 
+// Sites that require capture phase handling due to custom event frameworks
+const CAPTURE_PHASE_SITES = new Set(["remotedesktop.google.com"]);
+
 function showNotification(message) {
   clearTimeout(notificationTimeout);
 
@@ -74,6 +77,12 @@ function preventClose(event) {
   return event.returnValue;
 }
 
+// Special handler for sites with custom event frameworks
+function preventCloseCapture(event) {
+  event.stopImmediatePropagation();
+  return preventClose(event);
+}
+
 function preventRefresh(event) {
   if (
     (event.ctrlKey && event.key.toLowerCase() === "r") ||
@@ -90,12 +99,22 @@ function preventRefresh(event) {
 function applyProtection() {
   chrome.storage.sync.get(["protectedUrls"], function (result) {
     const protectedUrls = result.protectedUrls || [];
+    const needsCapturePhase = CAPTURE_PHASE_SITES.has(window.location.hostname);
 
     if (isUrlProtected(window.location.href, protectedUrls)) {
-      window.addEventListener("beforeunload", preventClose);
+      // Sites with custom event frameworks need capture phase handling
+      if (needsCapturePhase) {
+        window.addEventListener("beforeunload", preventCloseCapture, true);
+      } else {
+        window.addEventListener("beforeunload", preventClose);
+      }
       document.addEventListener("keydown", preventRefresh);
     } else {
-      window.removeEventListener("beforeunload", preventClose);
+      if (needsCapturePhase) {
+        window.removeEventListener("beforeunload", preventCloseCapture, true);
+      } else {
+        window.removeEventListener("beforeunload", preventClose);
+      }
       document.removeEventListener("keydown", preventRefresh);
     }
   });

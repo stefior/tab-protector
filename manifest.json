@@ -1,13 +1,14 @@
 {
   "manifest_version": 3,
   "name": "Tab Protector",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Prevents accidental tab closing and refreshing on specified websites",
   "permissions": ["storage", "tabs"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_start"
     }
   ],
   "action": {
